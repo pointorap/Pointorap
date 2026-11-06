@@ -10,7 +10,7 @@
 <input id="email" placeholder="Email" type="email">
 <input id="pass" placeholder="Password" type="password">
 <input id="ref" placeholder="Referral Code (optional)">
-<button onclick="signup()">Create Account & Get 100 Points 🎁</button>
+<button onclick="signup()">Create Account</button>
 <p id="msg"></p><p>Already have account? <a href="#" onclick="login()">Login</a></p>
 </div>
 <div class="card" id="dash" style="display:none">
@@ -34,7 +34,7 @@ document.getElementById('msg').innerText="Account created! Login now.";}
 async function login(){
 let email=document.getElementById('email').value, pass=document.getElementById('pass').value;
 let {data,error}=await supabaseClient.auth.signInWithPassword({email,password:pass});
-if(error){alert(error.message);return;}
+if(error){if(error.message.includes('Email not confirmed')){alert('Please go and confirm your email in your email address, then come back and login');return;}alert(error.message);return;}
 let {data:u}=await supabaseClient.from('users').select('*').eq('id',data.user.id).single();
 if(u){showDash(u)} else {showDash({name:email,points:100,referral_code:'POINT'})}}
 function showDash(u){document.getElementById('authCard').style.display='none';document.getElementById('dash').style.display='block';document.getElementById('uName').innerText=u.name;document.getElementById('points').innerText=u.points;document.getElementById('myCode').innerText=u.referral_code;document.getElementById('link').innerText=location.href+"?ref="+u.referral_code;}
