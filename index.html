@@ -12,10 +12,16 @@
 <input id="ref" placeholder="Referral Code (optional)">
 <button onclick="signup()">Create Account</button>
 <p id="msg"></p><p>Already have account? <a href="#" onclick="login()">Login</a></p>
+  <div id="verifyBox" style="display:none;">
+<p>We send code to your email. Enter am here:</p>
+<input id="otpCode" placeholder="Enter code">
+<button onclick="verifyCode()">Verify & Login</button>
+  </div>
 </div>
-<div class="card" id="dash" style="display:none">
+<div class="card" id="dash" style="display:none"
 <h2>Welcome, <span id="uName"></span> 👋</h2>
 <div class="pts"><span id="points">0</span> pts</div>
+  
 <p>Your Referral Code: <b id="myCode"></b></p>
 <p>Share: <span id="link"></span></p>
 <button onclick="daily()">Claim Daily +10 Points</button>
